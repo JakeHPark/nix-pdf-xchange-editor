@@ -31,3 +31,20 @@ nixpkgs.overlays = [
 ];
 # ...
 ```
+
+To remove protections on the PDF, just print the PDF to PDF:
+
+```nix
+services.printing = {
+  enable = true;
+
+  cups-pdf = {
+    enable = true;
+
+    instances.pdf.settings = {
+      Out = "\${HOME}/Desktop";
+      UserUMask = "0033";
+    };
+  };
+};
+```
